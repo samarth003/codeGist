@@ -30,7 +30,7 @@ public class MusicPane extends JFrame
 		
 		this.setSize(MusicPaneWidth, MusicPaneHeight);
 		panelMusic.setBackground(Color.CYAN);
-		this.setVisible(true);
+		//this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);

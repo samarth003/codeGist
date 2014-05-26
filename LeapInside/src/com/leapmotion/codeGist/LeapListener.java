@@ -18,6 +18,7 @@ public class LeapListener extends Listener
 	{
 		super();
 		pane = windowLeap;
+		musicChann = new MusicPane();
 	}
 	public void onConnect(Controller controller)
 	{
@@ -54,12 +55,7 @@ public class LeapListener extends Listener
 					//System.out.println(pane.winWidth);
 					System.out.println(Xnorm + "," + Ynorm);					
 				}
-				//count = MAX_FRAME_COUNT;
-				//while(count != 0)
-			//	{
-					GestureRecog(currFrame.gestures(), controller);
-				//	count--;
-			//	}	
+					GestureRecog(currFrame.gestures(), controller);	
 			}
 		}
 	}
@@ -69,9 +65,6 @@ public class LeapListener extends Listener
 	{
 		for (Gesture gesture : gestures)
 		{
-			//count = 0;
-			//while(count < MAX_FRAME_COUNT)
-			//{
 				switch(gesture.type())
 				{
 				case TYPE_CIRCLE:
@@ -93,9 +86,7 @@ public class LeapListener extends Listener
 				default:
 					System.out.println("Unknown gesture type.");
 					break;
-				}
-				//count++;
-			//}			
+				}			
 		}
 
 		if(clockwiseness == "clockwise")
