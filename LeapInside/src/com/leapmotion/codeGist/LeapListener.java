@@ -93,31 +93,8 @@ public class LeapListener extends Listener
 		{
 			/*----generate a new frame consisting of music panel----*/
 			//new MusicPane();
+			pane.setVisible(false);
 			musicChann.setVisible(true);
 		}
 	}
-	
-
-/*	
-	public void moveMouse(float x, float y)
-	{
-		Robot mouseHandler;
-		if((Xnorm!=x) ||(Ynorm!=y))
-		{
-			Xnorm = x;
-			Ynorm = y;
-			
-			try
-			{
-				mouseHandler = new Robot();
-				mouseHandler.mouseMove((int)x, (int)y);
-			}
-			catch (AWTException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		
-	}
-*/	
 }

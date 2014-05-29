@@ -3,6 +3,8 @@ package com.leapmotion.codeGist;
 import java.awt.AWTException;
 import java.awt.Robot;
 
+import javax.swing.JFrame;
+
 import com.leapmotion.leap.*;
 import com.leapmotion.leap.Gesture.*;
 
@@ -11,26 +13,28 @@ public class MusicPaneListener extends Listener
 	String clockwiseness;
 	//int count;
 	private MusicPane musicChann;
-	private static final int MAX_FRAME_COUNT = 20;
+	//private static final int MAX_FRAME_COUNT = 20;
+	private LeapFrame listenerPane;
 	
 	public MusicPaneListener(MusicPane musPane)
 	{
 		super();
 		musicChann = musPane;
+		//listenerPane = new LeapFrame();
 	}
-	public void onConnect(Controller controllerOne)
+	public void onConnect(Controller controller)
 	{
 		System.out.println("controllerOne has been connected");
-		controllerOne.enableGesture(Gesture.Type.TYPE_CIRCLE);
+		controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
 	}
-	public void onExit(Controller controllerOne)
+	public void onExit(Controller controller)
 	{
 		System.out.println("exiting controllerOne");
 	}
-	public void onFrame(Controller controllerOne)
+	public void onFrame(Controller controller)
 	{
-		Frame currFrameOne = controllerOne.frame();
-		Frame prevFrameOne = controllerOne.frame(1);
+		Frame currFrameOne = controller.frame();
+		Frame prevFrameOne = controller.frame(1);
 		
 		InteractionBox ibox = currFrameOne.interactionBox();
 		
@@ -53,7 +57,7 @@ public class MusicPaneListener extends Listener
 					//System.out.println(pane.winWidth);
 					System.out.println(Xnorm + "," + Ynorm);					
 				}
-				GestureRecog(currFrameOne.gestures(), controllerOne);
+				GestureRecog(currFrameOne.gestures(), controller);
 			}
 		}
 	}
@@ -62,9 +66,6 @@ public class MusicPaneListener extends Listener
 	{
 		for (Gesture gesture : gestures)
 		{
-			//count = 0;
-			//while(count < MAX_FRAME_COUNT)
-			//{
 				switch(gesture.type())
 				{
 				case TYPE_CIRCLE:
@@ -86,10 +87,16 @@ public class MusicPaneListener extends Listener
 				default:
 					System.out.println("Unknown gesture type.");
 					break;
-				}
-				//count++;
-			//}				
+				}			
 		}
+		
+		if(clockwiseness == "counterclockwise on musicPane")
+		{
+			//listenerPane.setVisible(true);
+			musicChann.setVisible(false);
+			listenerPane.setVisible(true);
+		}
+		
 	}	
 }
 
