@@ -14,11 +14,13 @@ public class LeapListener extends Listener
 	int count;
 	private MusicPane musicChann;
 	private static final int MAX_FRAME_COUNT = 20;
+	
 	public LeapListener(LeapFrame windowLeap)
 	{
 		super();
 		pane = windowLeap;
-		musicChann = new MusicPane();
+		musicChann = new MusicPane(windowLeap);
+		//musicChann = new MusicPane();
 	}
 	public void onConnect(Controller controller)
 	{

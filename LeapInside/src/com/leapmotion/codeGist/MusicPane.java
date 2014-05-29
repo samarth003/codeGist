@@ -19,12 +19,12 @@ public class MusicPane extends JFrame
 	private MusicPaneListener MusicPanel;
 	private Controller controllerOne;
 	
-	public MusicPane()
+	public MusicPane(LeapFrame leapFrame)
 	{
 		//JFrame musicWindow = new JFrame();
 		panelMusic = new JPanel();
 		
-		MusicPanel = new MusicPaneListener(this); //TODO:define a constructor for music pane in the leap motion listener class
+		MusicPanel = new MusicPaneListener(this, leapFrame); //TODO:define a constructor for music pane in the leap motion listener class
 		controllerOne = new Controller();
 		controllerOne.addListener(MusicPanel);
 		
