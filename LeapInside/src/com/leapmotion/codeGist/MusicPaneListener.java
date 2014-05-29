@@ -33,6 +33,11 @@ public class MusicPaneListener extends Listener
 	}
 	public void onFrame(Controller controller)
 	{
+		if(!musicChann.isVisible())
+		{
+			return;
+		}
+		
 		Frame currFrameOne = controller.frame();
 		Frame prevFrameOne = controller.frame(1);
 		

@@ -31,6 +31,11 @@ public class LeapListener extends Listener
 	}
 	public void onFrame(Controller controller)
 	{
+		if(!pane.isVisible())
+		{
+			return;
+		}
+		
 		Frame currFrame = controller.frame();
 		Frame prevFrame = controller.frame(1);
 		
