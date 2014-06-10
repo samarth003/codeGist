@@ -1,3 +1,4 @@
+/*
 package com.leapmotion.codeGist;
 
 import java.awt.Color;
@@ -52,3 +53,4 @@ public class MusicPane extends JFrame
 		}
 	}
 }
+*/

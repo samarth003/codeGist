@@ -2,24 +2,28 @@ package com.leapmotion.codeGist;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import com.leapmotion.leap.*;
 import com.leapmotion.leap.Gesture.*;
+
 
 public class LeapListener extends Listener
 {
 	private LeapFrame pane;
 	//float Xnorm=0, Ynorm=0;
 	String clockwiseness;
-	int count;
-	private MusicPane musicChann;
-	private static final int MAX_FRAME_COUNT = 20;
+	//int count;
+	//TODO:private MusicPane musicChann;
+	private JavaFXVideoPlayerLaunchedFromSwing musicChann;
 	
 	public LeapListener(LeapFrame windowLeap)
 	{
 		super();
 		pane = windowLeap;
-		musicChann = new MusicPane(windowLeap);
+		musicChann = new JavaFXVideoPlayerLaunchedFromSwing(windowLeap); 
+		//TODO:musicChann = new MusicPane(windowLeap);
 		//musicChann = new MusicPane();
 	}
 	public void onConnect(Controller controller)
@@ -95,6 +99,7 @@ public class LeapListener extends Listener
 					break;
 				}			
 		}
+
 
 		if(clockwiseness == "clockwise")
 		{

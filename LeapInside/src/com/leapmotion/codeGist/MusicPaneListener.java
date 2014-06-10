@@ -11,12 +11,13 @@ import com.leapmotion.leap.Gesture.*;
 public class MusicPaneListener extends Listener
 {
 	String clockwiseness;
-	//int count;
-	private MusicPane musicChann;
-	//private static final int MAX_FRAME_COUNT = 20;
+	//TODO:private MusicPane musicChann;
+	private JavaFXVideoPlayerLaunchedFromSwing musicChann;
+	
 	private LeapFrame listenerPane;
 	
-	public MusicPaneListener(MusicPane musPane, LeapFrame frLeap)
+	//TODO:public MusicPaneListener(MusicPane musPane, LeapFrame frLeap)
+	public MusicPaneListener(JavaFXVideoPlayerLaunchedFromSwing musPane, LeapFrame frLeap)
 	{
 		super();
 		musicChann = musPane;

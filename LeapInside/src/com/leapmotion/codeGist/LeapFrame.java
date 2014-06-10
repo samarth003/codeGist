@@ -1,18 +1,17 @@
 package com.leapmotion.codeGist;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.leapmotion.leap.*;
-
-import java.awt.AWTException;
-import java.awt.Robot;
+import com.leapmotion.leap.Controller;
 public class LeapFrame extends JFrame
 {
 	private JPanel panelLeap;
@@ -23,7 +22,7 @@ public class LeapFrame extends JFrame
 	private Controller controller;
 	
 	public LeapFrame()	/*---constructor defining the window characteristics---*/
-	{
+	{	
 		//JFrame mainWindow = new JFrame();
 		panelLeap = new JPanel();
 		
