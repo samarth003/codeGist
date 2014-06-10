@@ -24,7 +24,7 @@ public class JavaFXVideoPlayerLaunchedFromSwing extends JFrame{
 	public static final int MusicPaneHeight = 600;
 	private MusicPaneListener MusicPanel;
 	private Controller controller;
-	
+
 	public JavaFXVideoPlayerLaunchedFromSwing(LeapFrame leapFrame){
 		
 		super("Beats");
@@ -35,14 +35,15 @@ public class JavaFXVideoPlayerLaunchedFromSwing extends JFrame{
 		//JFrame frame = new JFrame("Beats");
 	    final JFXPanel fxPanel = new JFXPanel();
 	    //frame.add(fxPanel);
-	    this.setLocationRelativeTo(null);//TODO
 	    this.setSize(MusicPaneWidth, MusicPaneHeight);//TODO
+	    this.setLocationRelativeTo(null);//TODO
 	    //frame.setBounds(200, 100, 800, 250);
 	    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	    //this.setVisible(true);
 	    this.getContentPane().add(fxPanel);
 	  
 	    Platform.runLater(new Runnable() {
+	    //SwingUtilities.invokeLater(new Runnable(){
 	      @Override public void run() {
 	        initFX(fxPanel);        
 	      }
@@ -55,38 +56,10 @@ public class JavaFXVideoPlayerLaunchedFromSwing extends JFrame{
 //			}
 //		});
 	}
-/*	
-	public void initAndShowGUI() {
-    // This method is invoked on Swing thread
-    JFrame frame = new JFrame("Beats");
-    final JFXPanel fxPanel = new JFXPanel();
-    frame.add(fxPanel);
-    frame.setLocationRelativeTo(null);//TODO
-    frame.setSize(MusicPaneWidth, MusicPaneHeight);//TODO
-    //frame.setBounds(200, 100, 800, 250);
-    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    //frame.setVisible(true);
-    
-    Platform.runLater(new Runnable() {
-      @Override public void run() {
-        initFX(fxPanel);        
-      }
-    });
-  }
-*/
+
   public void initFX(JFXPanel fxPanel) {
     // This method is invoked on JavaFX thread
     Scene scene = new SceneGenerator().createScene();
     fxPanel.setScene(scene);
-  }
-
-/* 
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      @Override public void run() {
-        initAndShowGUI();
-      }
-    });
-  }
-*/  
+  }  
 }

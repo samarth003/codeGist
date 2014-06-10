@@ -13,7 +13,7 @@ public class MusicPaneListener extends Listener
 	String clockwiseness;
 	//TODO:private MusicPane musicChann;
 	private JavaFXVideoPlayerLaunchedFromSwing musicChann;
-	
+	private SceneGenerator geneScene;
 	private LeapFrame listenerPane;
 	
 	//TODO:public MusicPaneListener(MusicPane musPane, LeapFrame frLeap)
@@ -28,6 +28,7 @@ public class MusicPaneListener extends Listener
 	{
 		System.out.println("controllerOne has been connected");
 		controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
+		controller.enableGesture(Gesture.Type.TYPE_SWIPE);
 	}
 	public void onExit(Controller controller)
 	{
@@ -91,6 +92,10 @@ public class MusicPaneListener extends Listener
 						System.out.println(clockwiseness);
 					}
 					break;
+				case TYPE_SWIPE:
+					SwipeGesture swipe = new SwipeGesture(gesture);
+					clockwiseness = "It's a swipe!";
+					break;
 				default:
 					System.out.println("Unknown gesture type.");
 					break;
@@ -103,7 +108,6 @@ public class MusicPaneListener extends Listener
 			musicChann.setVisible(false);
 			listenerPane.setVisible(true);
 		}
-		
 	}	
 }
 

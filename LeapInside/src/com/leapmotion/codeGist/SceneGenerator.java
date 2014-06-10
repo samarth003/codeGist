@@ -24,33 +24,43 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import com.leapmotion.leap.Gesture.*;
+import com.leapmotion.leap.*;
 
-class SceneGenerator {    
+
+public class SceneGenerator {    
 	  
 	  //private LeapFrame leapy;
 	  final Label currentlyPlaying = new Label();
 	  final ProgressBar progress = new ProgressBar();
 	  private ChangeListener<Duration> progressChangeListener;
+	  private Gesture gesture;
+	  
+	  public Scene createScene() 
+	  {
+		  final StackPane layout = new StackPane();
 
-	  public Scene createScene() {
-	    final StackPane layout = new StackPane();
-
-	    // determine the source directory for the playlist
-	    final File dir = new File("S:/songs/YehJawaniHaiDeewani");
-	    if (!dir.exists() || !dir.isDirectory()) {
-	      System.out.println("Cannot find video source directory: " + dir);
-	      Platform.exit();
-	      return null;
-	    }
+		  // determine the source directory for the playlist
+		  final File dir = new File("S:/songs/YehJawaniHaiDeewani");
+		  if (!dir.exists() || !dir.isDirectory()) 
+		  {
+			  System.out.println("Cannot find video source directory: " + dir);
+			  Platform.exit();
+			  return null;
+		  }
 
 	    // create some media players.
 	    final List<MediaPlayer> players = new ArrayList<MediaPlayer>();
-	    for (String file : dir.list(new FilenameFilter() {
-	      @Override public boolean accept(File dir, String name) {
+	    for (String file : dir.list(new FilenameFilter() 
+	    {
+	      @Override public boolean accept(File dir, String name) 
+	      {
 	        return name.endsWith(".mp3");
 	      }
 	    })) players.add(createPlayer("file:///" + (dir + "\\" + file).replace("\\", "/").replaceAll(" ", "%20")));
-	    if (players.isEmpty()) {
+	    
+	    if (players.isEmpty()) 
+	    {
 	      System.out.println("No audio found in " + dir);
 	      Platform.exit();
 	      return null;
@@ -62,12 +72,15 @@ class SceneGenerator {
 	    final Button play = new Button("Pause");
 	    
 	    // play each audio file in turn.
-	    	for (int i = 0; i < players.size(); i++) {
+	    	for (int i = 0; i < players.size(); i++) 
+	    	{
 	    		final MediaPlayer player     = players.get(i);
 	    		final MediaPlayer nextPlayer = players.get((i + 1) % players.size());
 	    		//if(leapy.isVisible() == false){
-	    		player.setOnEndOfMedia(new Runnable() {
-	    			@Override public void run() {
+	    		player.setOnEndOfMedia(new Runnable() 
+	    		{
+	    			@Override public void run() 
+	    			{
 	    				player.currentTimeProperty().removeListener(progressChangeListener);
 	    				mediaView.setMediaPlayer(nextPlayer);
 	    				//if(!leapy.isVisible())
@@ -77,8 +90,10 @@ class SceneGenerator {
 	    		//}
 	    	}
 	    // allow the user to skip a track.
+/*	    	
 	    skip.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override public void handle(ActionEvent actionEvent) {
+	    	  
 	        final MediaPlayer curPlayer = mediaView.getMediaPlayer();
 	        MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
 	        mediaView.setMediaPlayer(nextPlayer);
@@ -86,8 +101,34 @@ class SceneGenerator {
 	        curPlayer.stop();
 	        nextPlayer.play();
 	      }
-	    });
-
+	    });	
+*/	    
+/*----------------------------------------to edit-------------------------------------------------------------------*/	    
+ 	
+	     if(gesture.type() == Gesture.Type.TYPE_SWIPE)
+	     {
+	    	 final MediaPlayer curPlayer = mediaView.getMediaPlayer();
+		     MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
+		     mediaView.setMediaPlayer(nextPlayer);
+		     curPlayer.currentTimeProperty().removeListener(progressChangeListener);
+		     curPlayer.stop();
+		     nextPlayer.play(); 
+	     }
+	     
+	     if(gesture.type() == Gesture.Type.TYPE_SCREEN_TAP)
+	     {
+	    	 if ("Pause".equals(play.getText())) {
+		          mediaView.getMediaPlayer().pause();
+		          play.setText("Play");
+		        } else {
+		          mediaView.getMediaPlayer().play();
+		          play.setText("Pause");
+		        }
+	     }
+	     
+	    
+/*--------------------------------------------------------------------------------------------------------------------------*/	    
+/*	    
 	    // allow the user to play or pause a track.
 	    play.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override public void handle(ActionEvent actionEvent) {
@@ -100,13 +141,15 @@ class SceneGenerator {
 	        }
 	      }
 	    });
-
+*/
 	    // display the name of the currently playing track.
-	    mediaView.mediaPlayerProperty().addListener(new ChangeListener<MediaPlayer>() {
-	      @Override public void changed(ObservableValue<? extends MediaPlayer> observableValue, MediaPlayer oldPlayer, MediaPlayer newPlayer) {
-	        setCurrentlyPlaying(newPlayer);
-	      }
-	    });
+	    mediaView.mediaPlayerProperty().addListener(new ChangeListener<MediaPlayer>() 
+	    		{
+	    			@Override public void changed(ObservableValue<? extends MediaPlayer> observableValue, MediaPlayer oldPlayer, MediaPlayer newPlayer) 
+	    			{
+	    				setCurrentlyPlaying(newPlayer);
+	    			}
+	    		});
 
 	    // start playing the first track.
 	    mediaView.setMediaPlayer(players.get(0));
@@ -134,7 +177,7 @@ class SceneGenerator {
 	    return new Scene(layout, 800, 600);
 	  }
 	  /** sets the currently playing label to the label of the new media player and updates the progress monitor. */
-
+	  
 	private void setCurrentlyPlaying(final MediaPlayer newPlayer) {
 	    progress.setProgress(0);
 	    progressChangeListener = new ChangeListener<Duration>() {
