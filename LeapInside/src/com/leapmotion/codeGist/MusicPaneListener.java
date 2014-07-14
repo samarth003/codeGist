@@ -22,6 +22,7 @@ public class MusicPaneListener extends Listener
 		super();
 		musicChann = musPane;
 		listenerPane = frLeap;
+		//geneScene = scenePlay;
 		//listenerPane = new LeapFrame();
 	}
 	public void onConnect(Controller controller)
@@ -29,6 +30,7 @@ public class MusicPaneListener extends Listener
 		System.out.println("controllerOne has been connected");
 		controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
 		controller.enableGesture(Gesture.Type.TYPE_SWIPE);
+		controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
 	}
 	public void onExit(Controller controller)
 	{
@@ -70,7 +72,7 @@ public class MusicPaneListener extends Listener
 		}
 	}
 	
-	public void GestureRecog(GestureList gestures, Controller controllerOne)
+	public void GestureRecog(GestureList gestures, Controller controller)
 	{
 		for (Gesture gesture : gestures)
 		{
@@ -94,7 +96,14 @@ public class MusicPaneListener extends Listener
 					break;
 				case TYPE_SWIPE:
 					SwipeGesture swipe = new SwipeGesture(gesture);
-					clockwiseness = "It's a swipe!";
+					//if(swipe.direction())
+						clockwiseness = "It's a swipe!";
+					break;
+				case TYPE_SCREEN_TAP:
+					ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
+					clockwiseness = "Make it play/pause";
+					
+					
 					break;
 				default:
 					System.out.println("Unknown gesture type.");
@@ -108,6 +117,16 @@ public class MusicPaneListener extends Listener
 			musicChann.setVisible(false);
 			listenerPane.setVisible(true);
 		}
+		
+		if(clockwiseness == "It's a swipe!"){
+			geneScene.switchSong();
+			
+		}
+		
+		if(clockwiseness == "Make it play/pause"){
+			geneScene.playSong();
+		}
+			
 	}	
 }
 

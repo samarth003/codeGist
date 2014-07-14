@@ -34,12 +34,20 @@ public class SceneGenerator {
 	  final Label currentlyPlaying = new Label();
 	  final ProgressBar progress = new ProgressBar();
 	  private ChangeListener<Duration> progressChangeListener;
-	  private Gesture gesture;
+	  //private Gesture gesture;			//TODO: 24/6/14
+	  private MusicPaneListener audioFrame; //TODO: 24/6/14
+	  private GestureList gestures;			//TODO: 24/6/14
+	  private Controller controller;
 	  
-	  public Scene createScene() 
+	  private List<MediaPlayer> players = new ArrayList<MediaPlayer>();
+	  private MediaView mediaView;
+	  private Button play;
+	  
+	  public Scene createScene(MusicPaneListener frameMusic) 
 	  {
 		  final StackPane layout = new StackPane();
-
+		  audioFrame = frameMusic; //TODO: 24/6/14
+		  
 		  // determine the source directory for the playlist
 		  final File dir = new File("S:/songs/YehJawaniHaiDeewani");
 		  if (!dir.exists() || !dir.isDirectory()) 
@@ -50,7 +58,7 @@ public class SceneGenerator {
 		  }
 
 	    // create some media players.
-	    final List<MediaPlayer> players = new ArrayList<MediaPlayer>();
+	    //final List<MediaPlayer> players = new ArrayList<MediaPlayer>();
 	    for (String file : dir.list(new FilenameFilter() 
 	    {
 	      @Override public boolean accept(File dir, String name) 
@@ -67,9 +75,11 @@ public class SceneGenerator {
 	    }    
 
 	    // create a view to show the mediaplayers.
-	    final MediaView mediaView = new MediaView(players.get(0));
+	    mediaView = new MediaView(players.get(0));
+	    //final MediaView mediaView = new MediaView(players.get(0));
 	    final Button skip = new Button("Skip");
-	    final Button play = new Button("Pause");
+	    play = new Button("Pause");
+	    //final Button play = new Button("Pause");
 	    
 	    // play each audio file in turn.
 	    	for (int i = 0; i < players.size(); i++) 
@@ -90,22 +100,29 @@ public class SceneGenerator {
 	    		//}
 	    	}
 	    // allow the user to skip a track.
-/*	    	
+   		
+	   //switchSong();
+	   //switchSong(mediaView, players); //TODO: 24/6/14   
+	   //playSong();
+	   //playSong(mediaView, play); 		//TODO: 24/6/14
+	    	
 	    skip.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override public void handle(ActionEvent actionEvent) {
-	    	  
+/*	    	  
 	        final MediaPlayer curPlayer = mediaView.getMediaPlayer();
 	        MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
 	        mediaView.setMediaPlayer(nextPlayer);
 	        curPlayer.currentTimeProperty().removeListener(progressChangeListener);
 	        curPlayer.stop();
 	        nextPlayer.play();
+*/	
 	      }
 	    });	
-*/	    
+	    
 /*----------------------------------------to edit-------------------------------------------------------------------*/	    
- 	
-	     if(gesture.type() == Gesture.Type.TYPE_SWIPE)
+/* 	
+	     //if(gesture.type() == Gesture.Type.TYPE_SWIPE)
+	 	public void switchSong(MediaView mediaView, List<MediaPlayer> players)
 	     {
 	    	 final MediaPlayer curPlayer = mediaView.getMediaPlayer();
 		     MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
@@ -116,6 +133,7 @@ public class SceneGenerator {
 	     }
 	     
 	     if(gesture.type() == Gesture.Type.TYPE_SCREEN_TAP)
+	     public void playSong(MediaView mediaView)
 	     {
 	    	 if ("Pause".equals(play.getText())) {
 		          mediaView.getMediaPlayer().pause();
@@ -126,22 +144,24 @@ public class SceneGenerator {
 		        }
 	     }
 	     
-	    
+*/	    
 /*--------------------------------------------------------------------------------------------------------------------------*/	    
-/*	    
+	    
 	    // allow the user to play or pause a track.
 	    play.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override public void handle(ActionEvent actionEvent) {
-	        if ("Pause".equals(play.getText())) {
+/*	    
+	    	  if ("Pause".equals(play.getText())) {
 	          mediaView.getMediaPlayer().pause();
 	          play.setText("Play");
 	        } else {
 	          mediaView.getMediaPlayer().play();
 	          play.setText("Pause");
 	        }
-	      }
+*/	      
+	      }	      
 	    });
-*/
+
 	    // display the name of the currently playing track.
 	    mediaView.mediaPlayerProperty().addListener(new ChangeListener<MediaPlayer>() 
 	    		{
@@ -204,4 +224,30 @@ public class SceneGenerator {
 	    });
 	    return player;
 	  }
-	}
+	
+
+	
+	//public void switchSong(MediaView mediaView, List<MediaPlayer> players)
+    public void switchSong()
+	{
+   	 	final MediaPlayer curPlayer = mediaView.getMediaPlayer();
+	     MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
+	     mediaView.setMediaPlayer(nextPlayer);
+	     curPlayer.currentTimeProperty().removeListener(progressChangeListener);
+	     curPlayer.stop();
+	     nextPlayer.play(); 
+    }
+	
+	//public void playSong(MediaView mediaView, Button play)
+    public void playSong()
+	{
+   	 if ("Pause".equals(play.getText())) {
+	          mediaView.getMediaPlayer().pause();
+	          play.setText("Play");
+	        } else {
+	          mediaView.getMediaPlayer().play();
+	          play.setText("Pause");
+	        }
+    }
+
+}

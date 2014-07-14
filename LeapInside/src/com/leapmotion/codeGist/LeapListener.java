@@ -99,12 +99,9 @@ public class LeapListener extends Listener
 					break;
 				}			
 		}
-
-
 		if(clockwiseness == "clockwise")
 		{
 			/*----generate a new frame consisting of music panel----*/
-			//new MusicPane();
 			pane.setVisible(false);
 			musicChann.setVisible(true);
 		}
