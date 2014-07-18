@@ -61,11 +61,11 @@ public class MusicPaneListener extends Listener
 					Vector stabilizedPosition = fingers.stabilizedTipPosition();
 					//InteractionBox ibox = new InteractionBox();
 					Vector normalizedPosition = ibox.normalizePoint(stabilizedPosition);
-					System.out.println("The normalized position is:" + normalizedPosition); //check for the vector position					
+					//System.out.println("The normalized position is:" + normalizedPosition); //check for the vector position					
 					float Xnorm = normalizedPosition.getX() * musicChann.MusicPaneWidth;//pane.getWidth();
 					float Ynorm = musicChann.MusicPaneHeight * (1 - normalizedPosition.getY());
 					//System.out.println(pane.winWidth);
-					System.out.println(Xnorm + "," + Ynorm);					
+					//System.out.println(Xnorm + "," + Ynorm);					
 				}
 				GestureRecog(currFrameOne.gestures(), controller);
 			}
@@ -97,13 +97,13 @@ public class MusicPaneListener extends Listener
 				case TYPE_SWIPE:
 					SwipeGesture swipe = new SwipeGesture(gesture);
 					//if(swipe.direction())
-						clockwiseness = "It's a swipe!";
+						clockwiseness = "switch to next media file";
+						System.out.println(clockwiseness);
 					break;
 				case TYPE_SCREEN_TAP:
 					ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
-					clockwiseness = "Make it play/pause";
-					
-					
+					clockwiseness = "Let the media file Play";
+					System.out.println(clockwiseness);
 					break;
 				default:
 					System.out.println("Unknown gesture type.");
@@ -118,15 +118,16 @@ public class MusicPaneListener extends Listener
 			listenerPane.setVisible(true);
 		}
 		
-		if(clockwiseness == "It's a swipe!"){
+		if(clockwiseness == "switch to next media file"){
+			//System.out.println(clockwiseness);
 			geneScene.switchSong();
 			
 		}
 		
-		if(clockwiseness == "Make it play/pause"){
+		if(clockwiseness == "Let the media file Play"){
+			//System.out.println(clockwiseness);
 			geneScene.playSong();
-		}
-			
+		}		
 	}	
 }
 

@@ -1,3 +1,4 @@
+
 package com.leapmotion.codeGist;
 
 import java.io.File;
@@ -119,7 +120,7 @@ public class SceneGenerator {
 	      }
 	    });	
 	    
-/*----------------------------------------to edit-------------------------------------------------------------------*/	    
+/*-----------------------------------------------------------------------------------------------------------*/	    
 /* 	
 	     //if(gesture.type() == Gesture.Type.TYPE_SWIPE)
 	 	public void switchSong(MediaView mediaView, List<MediaPlayer> players)
@@ -158,7 +159,7 @@ public class SceneGenerator {
 	          mediaView.getMediaPlayer().play();
 	          play.setText("Pause");
 	        }
-*/	      
+*/	        	      
 	      }	      
 	    });
 
@@ -196,8 +197,9 @@ public class SceneGenerator {
 	    HBox.setHgrow(progress, Priority.ALWAYS);
 	    return new Scene(layout, 800, 600);
 	  }
-	  /** sets the currently playing label to the label of the new media player and updates the progress monitor. */
 	  
+	  /** sets the currently playing label to the label of the new media player and updates the progress monitor. */
+  
 	private void setCurrentlyPlaying(final MediaPlayer newPlayer) {
 	    progress.setProgress(0);
 	    progressChangeListener = new ChangeListener<Duration>() {
@@ -212,6 +214,7 @@ public class SceneGenerator {
 	    source = source.substring(source.lastIndexOf("/") + 1).replaceAll("%20", " ");
 	    currentlyPlaying.setText("Now Playing: " + source);
 	  }
+	  
 	  /** @return a MediaPlayer for the given source which will report any errors it encounters */
 
 	private MediaPlayer createPlayer(String aMediaSrc) {
@@ -249,5 +252,5 @@ public class SceneGenerator {
 	          play.setText("Pause");
 	        }
     }
-
+    
 }

@@ -1,3 +1,4 @@
+
 package com.leapmotion.codeGist;
 
 import java.io.*;
@@ -18,6 +19,7 @@ import com.leapmotion.leap.*;
 /** Example of playing all mp3 audio files in a given directory 
  * using a JavaFX MediaView launched from Swing 
  */
+
 public class JavaFXVideoPlayerLaunchedFromSwing extends JFrame{
   
 	public static final int MusicPaneWidth = 800;

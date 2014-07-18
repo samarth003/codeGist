@@ -35,16 +35,14 @@ public class LeapListener extends Listener
 	{
 		System.out.println("exited");
 	}
-	public void onFrame(Controller controller)
-	{
+	public void onFrame(Controller controller){
 		if(!pane.isVisible())
 		{
 			return;
 		}
 		
 		Frame currFrame = controller.frame();
-		Frame prevFrame = controller.frame(1);
-		
+		Frame prevFrame = controller.frame(1);	
 		InteractionBox ibox = currFrame.interactionBox();
 		
 		if(!currFrame.hands().isEmpty())
@@ -68,9 +66,8 @@ public class LeapListener extends Listener
 				}
 					GestureRecog(currFrame.gestures(), controller);	
 			}
-		}
-	}
-	
+		}	
+	}	
 	@SuppressWarnings("deprecation")
 	public void GestureRecog(GestureList gestures, Controller controller)
 	{
@@ -104,6 +101,6 @@ public class LeapListener extends Listener
 			/*----generate a new frame consisting of music panel----*/
 			pane.setVisible(false);
 			musicChann.setVisible(true);
-		}
-	}
+		}		
+	}		
 }
