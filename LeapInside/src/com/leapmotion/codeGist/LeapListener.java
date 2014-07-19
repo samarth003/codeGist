@@ -17,12 +17,14 @@ public class LeapListener extends Listener
 	//int count;
 	//TODO:private MusicPane musicChann;
 	private JavaFXVideoPlayerLaunchedFromSwing musicChann;
+	private SceneGenerator geneScene;
 	
-	public LeapListener(LeapFrame windowLeap)
+	public LeapListener(LeapFrame windowLeap, SceneGenerator scenePlay)
 	{
 		super();
 		pane = windowLeap;
-		musicChann = new JavaFXVideoPlayerLaunchedFromSwing(windowLeap); 
+		geneScene = scenePlay;
+		musicChann = new JavaFXVideoPlayerLaunchedFromSwing(windowLeap, scenePlay); 
 		//TODO:musicChann = new MusicPane(windowLeap);
 		//musicChann = new MusicPane();
 	}

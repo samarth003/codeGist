@@ -20,14 +20,15 @@ public class LeapFrame extends JFrame
 	
 	private LeapListener panelListener;
 	private Controller controller;
-	//private SceneGenerator playMe;
-	//public LeapFrame(SceneGenerator scenePlay)	/*---constructor defining the window characteristics---*/
-	public LeapFrame()
+	private static SceneGenerator playMe;
+	
+	public LeapFrame(SceneGenerator scenePlay)	/*---constructor defining the window characteristics---*/
+	//public LeapFrame()
 	{	
 		panelLeap = new JPanel();
-		panelListener = new LeapListener(this);
-		//playMe = scenePlay;
-		//panelListener = new LeapListener(this, scenePlay);
+		//panelListener = new LeapListener(this);
+		playMe = scenePlay;
+		panelListener = new LeapListener(this, scenePlay);
 		controller = new Controller();
 		controller.addListener(panelListener);
 		
@@ -74,7 +75,7 @@ public class LeapFrame extends JFrame
 */	
 	public static void main(String args[])
 	{
-		new LeapFrame();
+		final LeapFrame lf = new LeapFrame(playMe);
 		//new LeapFrame(playMe);
 	}
 }

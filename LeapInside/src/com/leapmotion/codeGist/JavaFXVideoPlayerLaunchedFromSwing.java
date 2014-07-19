@@ -26,21 +26,17 @@ public class JavaFXVideoPlayerLaunchedFromSwing extends JFrame{
 	public static final int MusicPaneHeight = 600;
 	private MusicPaneListener MusicPanel;
 	private Controller controller;
-	public JavaFXVideoPlayerLaunchedFromSwing(LeapFrame leapFrame){
+	public JavaFXVideoPlayerLaunchedFromSwing(LeapFrame leapFrame, SceneGenerator scenePlay){
 		
 		super("Beats");
-		MusicPanel = new MusicPaneListener(this, leapFrame);
+		MusicPanel = new MusicPaneListener(this, leapFrame, scenePlay);
 		controller = new Controller();
 		controller.addListener(MusicPanel);
-		//MusicPanel.GestureRecog(gesture, controller);
-		//JFrame frame = new JFrame("Beats");
 	    final JFXPanel fxPanel = new JFXPanel();
-	    //frame.add(fxPanel);
+	    
 	    this.setSize(MusicPaneWidth, MusicPaneHeight);//TODO
 	    this.setLocationRelativeTo(null);//TODO
-	    //frame.setBounds(200, 100, 800, 250);
 	    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	    //this.setVisible(true);
 	    this.getContentPane().add(fxPanel);
 	  
 	    Platform.runLater(new Runnable() {

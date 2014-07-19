@@ -17,12 +17,12 @@ public class MusicPaneListener extends Listener
 	private LeapFrame listenerPane;
 	
 	//TODO:public MusicPaneListener(MusicPane musPane, LeapFrame frLeap)
-	public MusicPaneListener(JavaFXVideoPlayerLaunchedFromSwing musPane, LeapFrame frLeap)
+	public MusicPaneListener(JavaFXVideoPlayerLaunchedFromSwing musPane, LeapFrame frLeap, SceneGenerator scenePlay)
 	{
 		super();
 		musicChann = musPane;
 		listenerPane = frLeap;
-		//geneScene = scenePlay;
+		geneScene = scenePlay;
 		//listenerPane = new LeapFrame();
 	}
 	public void onConnect(Controller controller)
