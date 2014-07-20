@@ -96,14 +96,37 @@ public class MusicPaneListener extends Listener
 					break;
 				case TYPE_SWIPE:
 					SwipeGesture swipe = new SwipeGesture(gesture);
-					//if(swipe.direction())
-						clockwiseness = "switch to next media file";
-						System.out.println(clockwiseness);
+					switch (gesture.state()){
+
+						case STATE_START:
+							clockwiseness = "switch to next media file";
+							System.out.println(clockwiseness);
+							geneScene.switchSong();
+							break;
+						default:
+							System.out.println("null");
+							break;
+					}
+						//clockwiseness = "switch to next media file";
+						//System.out.println(clockwiseness);
 					break;
 				case TYPE_SCREEN_TAP:
 					ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
-					clockwiseness = "Let the media file Play";
-					System.out.println(clockwiseness);
+				
+					switch (gesture.state()){
+					
+						case STATE_STOP:
+							clockwiseness = "Let the media file Play";
+							System.out.println(clockwiseness);
+							geneScene.playSong();
+							break;
+						default: 
+							System.out.println("dont get too excited!");
+							break;
+					}
+					
+					//clockwiseness = "Let the media file Play";
+					//System.out.println(clockwiseness);
 					break;
 				default:
 					System.out.println("Unknown gesture type.");
@@ -117,17 +140,18 @@ public class MusicPaneListener extends Listener
 			musicChann.setVisible(false);
 			listenerPane.setVisible(true);
 		}
-		
+/*		
 		if(clockwiseness == "switch to next media file"){
 			//System.out.println(clockwiseness);
 			geneScene.switchSong();
 			
 		}
-		
+
 		if(clockwiseness == "Let the media file Play"){
 			//System.out.println(clockwiseness);
 			geneScene.playSong();
-		}		
+		}
+*/				
 	}	
 }
 

@@ -12,10 +12,8 @@ import com.leapmotion.leap.Gesture.*;
 public class LeapListener extends Listener
 {
 	private LeapFrame pane;
-	//float Xnorm=0, Ynorm=0;
 	String clockwiseness;
-	//int count;
-	//TODO:private MusicPane musicChann;
+
 	private JavaFXVideoPlayerLaunchedFromSwing musicChann;
 	private SceneGenerator geneScene;
 	
@@ -25,8 +23,6 @@ public class LeapListener extends Listener
 		pane = windowLeap;
 		geneScene = scenePlay;
 		musicChann = new JavaFXVideoPlayerLaunchedFromSwing(windowLeap, scenePlay); 
-		//TODO:musicChann = new MusicPane(windowLeap);
-		//musicChann = new MusicPane();
 	}
 	public void onConnect(Controller controller)
 	{
@@ -58,12 +54,10 @@ public class LeapListener extends Listener
 				{
 					Finger fingers = currFrame.fingers().frontmost();
 					Vector stabilizedPosition = fingers.stabilizedTipPosition();
-					//InteractionBox ibox = new InteractionBox();
 					Vector normalizedPosition = ibox.normalizePoint(stabilizedPosition);
-					System.out.println("The normalized position is:" + normalizedPosition); //check for the vector position					
-					float Xnorm = normalizedPosition.getX() * pane.winWidth;//pane.getWidth();
+					System.out.println("The normalized position is:" + normalizedPosition); 				
+					float Xnorm = normalizedPosition.getX() * pane.winWidth;
 					float Ynorm = pane.winDepth * (1 - normalizedPosition.getY());
-					//System.out.println(pane.winWidth);
 					System.out.println(Xnorm + "," + Ynorm);					
 				}
 					GestureRecog(currFrame.gestures(), controller);	
@@ -79,13 +73,11 @@ public class LeapListener extends Listener
 				{
 				case TYPE_CIRCLE:
 					CircleGesture circle = new CircleGesture(gesture);
-					//String clockwiseness;
 
 					if(circle.pointable().direction().angleTo(circle.normal()) <= Math.PI/2)
 					{
 						clockwiseness = "clockwise";
 						System.out.println(clockwiseness);
-						//new MusicPane();
 					}
 					else
 					{

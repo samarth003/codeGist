@@ -100,11 +100,6 @@ public class SceneGenerator {
 	    		//}
 	    	}
 	    // allow the user to skip a track.
-   		
-	   //switchSong();
-	   //switchSong(mediaView, players); //TODO: 24/6/14   
-	   //playSong();
-	   //playSong(mediaView, play); 		//TODO: 24/6/14
 	    	
 	    skip.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override public void handle(ActionEvent actionEvent) {
@@ -203,8 +198,6 @@ public class SceneGenerator {
 	  }
 	
 
-	
-	//public void switchSong(MediaView mediaView, List<MediaPlayer> players)
     public void switchSong()
 	{
     	System.out.println("test");
@@ -232,7 +225,6 @@ public class SceneGenerator {
 	     
     }
 	
-	//public void playSong(MediaView mediaView, Button play)
     public void playSong()
 	{
     	Platform.runLater(new Runnable() {
