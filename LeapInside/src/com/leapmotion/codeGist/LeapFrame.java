@@ -20,7 +20,7 @@ public class LeapFrame extends JFrame
 	
 	private LeapListener panelListener;
 	private Controller controller;
-	private static SceneGenerator playMe;
+	private static SceneGenerator playMe = new SceneGenerator();
 	
 	public LeapFrame(SceneGenerator scenePlay)	/*---constructor defining the window characteristics---*/
 	//public LeapFrame()

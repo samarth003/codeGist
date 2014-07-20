@@ -34,15 +34,13 @@ public class SceneGenerator {
 	  //private LeapFrame leapy;
 	  final Label currentlyPlaying = new Label();
 	  final ProgressBar progress = new ProgressBar();
-	  private ChangeListener<Duration> progressChangeListener;
+	  static  ChangeListener<Duration> progressChangeListener;
 	  //private Gesture gesture;			//TODO: 24/6/14
 	  private MusicPaneListener audioFrame; //TODO: 24/6/14
-	  private GestureList gestures;			//TODO: 24/6/14
-	  private Controller controller;
 	  
-	  private List<MediaPlayer> players = new ArrayList<MediaPlayer>();
-	  private MediaView mediaView;
-	  private Button play;
+	  private static List<MediaPlayer> players = new ArrayList<MediaPlayer>();
+	  private static MediaView mediaView;
+	  private static Button play;
 	  
 	  public Scene createScene(MusicPaneListener frameMusic) 
 	  {
@@ -77,6 +75,7 @@ public class SceneGenerator {
 
 	    // create a view to show the mediaplayers.
 	    mediaView = new MediaView(players.get(0));
+	    System.out.println("test"+mediaView.toString());
 	    //final MediaView mediaView = new MediaView(players.get(0));
 	    final Button skip = new Button("Skip");
 	    play = new Button("Pause");
@@ -120,33 +119,7 @@ public class SceneGenerator {
 	      }
 	    });	
 	    
-/*-----------------------------------------------------------------------------------------------------------*/	    
-/* 	
-	     //if(gesture.type() == Gesture.Type.TYPE_SWIPE)
-	 	public void switchSong(MediaView mediaView, List<MediaPlayer> players)
-	     {
-	    	 final MediaPlayer curPlayer = mediaView.getMediaPlayer();
-		     MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
-		     mediaView.setMediaPlayer(nextPlayer);
-		     curPlayer.currentTimeProperty().removeListener(progressChangeListener);
-		     curPlayer.stop();
-		     nextPlayer.play(); 
-	     }
-	     
-	     if(gesture.type() == Gesture.Type.TYPE_SCREEN_TAP)
-	     public void playSong(MediaView mediaView)
-	     {
-	    	 if ("Pause".equals(play.getText())) {
-		          mediaView.getMediaPlayer().pause();
-		          play.setText("Play");
-		        } else {
-		          mediaView.getMediaPlayer().play();
-		          play.setText("Pause");
-		        }
-	     }
-	     
-*/	    
-/*--------------------------------------------------------------------------------------------------------------------------*/	    
+
 	    
 	    // allow the user to play or pause a track.
 	    play.setOnAction(new EventHandler<ActionEvent>() {
@@ -176,7 +149,7 @@ public class SceneGenerator {
 	    mediaView.setMediaPlayer(players.get(0));
 	    mediaView.getMediaPlayer().play();
 	    setCurrentlyPlaying(mediaView.getMediaPlayer());
-
+	    
 	    // silly invisible button used as a template to get the actual preferred size of the Pause button.
 	    Button invisiblePause = new Button("Pause");
 	    invisiblePause.setVisible(false);
@@ -193,6 +166,7 @@ public class SceneGenerator {
 	        HBoxBuilder.create().spacing(10).alignment(Pos.CENTER).children(skip, play, progress).build()
 	      ).build()
 	    );
+	    System.out.println("test2 "+mediaView);
 	    progress.setMaxWidth(Double.MAX_VALUE);
 	    HBox.setHgrow(progress, Priority.ALWAYS);
 	    return new Scene(layout, 800, 600);
@@ -233,24 +207,47 @@ public class SceneGenerator {
 	//public void switchSong(MediaView mediaView, List<MediaPlayer> players)
     public void switchSong()
 	{
+    	System.out.println("test");
+    	System.out.println("test1"+mediaView.toString());
    	 	final MediaPlayer curPlayer = mediaView.getMediaPlayer();
-	     MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
-	     mediaView.setMediaPlayer(nextPlayer);
-	     curPlayer.currentTimeProperty().removeListener(progressChangeListener);
-	     curPlayer.stop();
-	     nextPlayer.play(); 
+   	 	
+   	 	System.out.println(curPlayer.toString());
+	     final MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
+	     System.out.println("testforNxt");
+	     System.out.println("testforNxt" + nextPlayer.toString());
+	     Platform.runLater(new Runnable() {
+	         @Override
+	         public void run() {
+	           //javaFX operations should go here
+	        	 mediaView.setMediaPlayer(nextPlayer);
+	        	 curPlayer.currentTimeProperty().removeListener(progressChangeListener);
+	    	     System.out.println("testforProgress");
+	    	     System.out.println(" test3" + progressChangeListener.toString());
+	    	     curPlayer.stop();
+	    	     nextPlayer.play(); 
+	         }
+	    });
+
+	     
+	     
     }
 	
 	//public void playSong(MediaView mediaView, Button play)
     public void playSong()
 	{
-   	 if ("Pause".equals(play.getText())) {
-	          mediaView.getMediaPlayer().pause();
-	          play.setText("Play");
-	        } else {
-	          mediaView.getMediaPlayer().play();
-	          play.setText("Pause");
-	        }
-    }
-    
+    	Platform.runLater(new Runnable() {
+    		@Override
+    		public void run() {
+    			if ("Pause".equals(play.getText())) {
+    				mediaView.getMediaPlayer().pause();
+    				play.setText("Play");
+    			} else {
+    				mediaView.getMediaPlayer().play();
+    				play.setText("Pause");
+    			}
+    		}
+   
+    	});
+	}	
 }
+    

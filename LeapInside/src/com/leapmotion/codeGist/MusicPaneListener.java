@@ -13,7 +13,7 @@ public class MusicPaneListener extends Listener
 	String clockwiseness;
 	//TODO:private MusicPane musicChann;
 	private JavaFXVideoPlayerLaunchedFromSwing musicChann;
-	private SceneGenerator geneScene;
+	private SceneGenerator geneScene = new SceneGenerator();
 	private LeapFrame listenerPane;
 	
 	//TODO:public MusicPaneListener(MusicPane musPane, LeapFrame frLeap)
